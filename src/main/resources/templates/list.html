@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+    <head th:replace="fragments :: head"></head>
+
+    <body>
+
+        <div th:replace="fragments :: page-header"></div>
+
+        <div class="container body-content">
+            <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+            <h2 class = "centered">View Jobs By Category</h2>
+        </div>
+
+        <table class="centeredTable">
+            <tr>
+                <th:block th:each="column : ${columns}">
+                    <th th:text = "${column.value}"></th>
+                </th:block>
+            </tr>
+            <tr>
+                <!-- #2: Complete the View Jobs By Category Table. -->
+
+<!--                <td></td> &lt;!&ndash; Feel free to remove or modify this element if necessary. &ndash;&gt;-->
+
+<!-- information stored in tableChoices generates the link text -->
+<!-- category represents one key/value pair from tableChoices, and item represents one entry from the stored ArrayList-->
+                <td th:each="category : ${tableChoices}">
+                    <ul>
+                        <li th:each="item : ${category.value}">
+                            <a th:href="@{/list/jobs(column=${category.key},value=${item})}" th:text="${item}"></a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+
+    </body>
+</html>
+
+<!-- columnChoices is used to fill in the header row-->
